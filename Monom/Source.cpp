@@ -4,8 +4,8 @@ void main()
 {
 	setlocale(LC_ALL, "rus");
 	TMonom a;
-	int i = 0;
-	while (i<3)
+	
+	while (1)
 	{	
 		
 		system("cls");
@@ -13,7 +13,6 @@ void main()
 		wcout << "wadawdawd ";
 		PrintMonom(a);
 		system("pause");
-		i++;
 	}
 	
 	/*TMonom m1;

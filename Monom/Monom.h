@@ -62,8 +62,8 @@ bool operator<(const TMonom &m1, const TMonom &m2)
 
 wchar_t digitToSuperscript(unsigned int digit) //Нахождение кода степени в таблице Unicode
 {
-	if (digit >= 10)
-		throw std::out_of_range("digit");
+	//if (digit >= 10)
+	//	throw std::out_of_range("digit");
 	switch (digit)
 	{
 	case 1:
@@ -97,8 +97,8 @@ void PrintPow(int pow)  //Печать степени
 void PrintMonom(TMonom &m) 
 {
 	_setmode(_fileno(stdout), _O_U16TEXT);
-	_setmode(_fileno(stdin), _O_U16TEXT);
-	_setmode(_fileno(stderr), _O_U16TEXT);
+	/*_setmode(_fileno(stdin), _O_U16TEXT);
+	_setmode(_fileno(stderr), _O_U16TEXT);*/
 	if (m.coeff != 0)
 	{
 		if (m.PowX == 0 && m.PowY == 0 && m.PowZ == 0)
@@ -109,19 +109,19 @@ void PrintMonom(TMonom &m)
 				wcout << m.coeff;
 			if (m.PowX != 0)
 			{
-				wcout << "x";
+				wcout << L"x";
 				if (m.PowX != 1)
 					PrintPow(m.PowX);
 			}
 			if (m.PowY != 0)
 			{
-				wcout << "y";
+				wcout << L"y";
 				if (m.PowY != 1)
 					PrintPow(m.PowY);
 			}
 			if (m.PowZ != 0)
 			{
-				wcout << "z";
+				wcout << L"z";
 				if (m.PowZ != 1)
 					PrintPow(m.PowZ);
 			}
