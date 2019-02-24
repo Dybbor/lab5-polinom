@@ -5,12 +5,12 @@ void main()
 	setlocale(LC_ALL, "rus");
 	TMonom a;
 	while (1)
-	{
+	{	
+		
 		system("cls");
 		cin >> a;
-		cout << "Вы ввели моном: " ;
+		cout << "wadawdawd ";
 		PrintMonom(a);
-		//cout << a << endl;
 		system("pause");
 	}
 	
@@ -33,5 +33,5 @@ void main()
 	//for (int i = 2; i >= 0; i--)
 	//	a.InsFirst(i);
 	//a.PrintList();
-	system("pause");
+
 }

@@ -2,6 +2,7 @@
 #include <io.h>
 #include <fcntl.h>
 #include <stdexcept>
+
 using namespace std;
 struct TMonom 
 {
