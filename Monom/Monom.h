@@ -97,8 +97,8 @@ void PrintPow(int pow)  //Печать степени
 void PrintMonom(TMonom &m) 
 {
 	_setmode(_fileno(stdout), _O_U16TEXT);
-	/*_setmode(_fileno(stdin), _O_U16TEXT);
-	_setmode(_fileno(stderr), _O_U16TEXT);*/
+	_setmode(_fileno(stdin), _O_U16TEXT);
+	_setmode(_fileno(stderr), _O_U16TEXT);
 	if (m.coeff != 0)
 	{
 		if (m.PowX == 0 && m.PowY == 0 && m.PowZ == 0)

@@ -4,14 +4,16 @@ void main()
 {
 	setlocale(LC_ALL, "rus");
 	TMonom a;
-	while (1)
+	int i = 0;
+	while (i<3)
 	{	
 		
 		system("cls");
 		cin >> a;
-		cout << "wadawdawd ";
+		wcout << "wadawdawd ";
 		PrintMonom(a);
 		system("pause");
+		i++;
 	}
 	
 	/*TMonom m1;
