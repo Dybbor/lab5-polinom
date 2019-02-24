@@ -1,9 +1,18 @@
-#include <iostream>
 #include "Monom.h"
-#include "..\HeadList\HeadList.h"
 using namespace std;
 void main() 
 {
+	setlocale(LC_ALL, "rus");
+	TMonom a;
+	while (1)
+	{
+		system("cls");
+		cin >> a;
+		cout << "Вы ввели моном :";
+		PrintMonom(a);
+		system("pause");
+	}
+	
 	/*TMonom m1;
 	m1.coeff = 2;
 	m1.PowX = 2;
@@ -23,5 +32,5 @@ void main()
 	//for (int i = 2; i >= 0; i--)
 	//	a.InsFirst(i);
 	//a.PrintList();
-	//system("pause");
+	system("pause");
 }
