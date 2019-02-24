@@ -1,8 +1,9 @@
 #include "Monom.h"
+
 using namespace std;
 void main() 
 {
-	setlocale(LC_ALL, "rus");
+	setlocale(LC_ALL, "Russian");
 	TMonom a;
 	
 	while (1)
@@ -10,7 +11,7 @@ void main()
 		
 		system("cls");
 		cin >> a;
-		wcout << "wadawdawd ";
+		wcout << "Monom: ";
 		PrintMonom(a);
 		system("pause");
 	}
