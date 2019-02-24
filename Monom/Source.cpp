@@ -8,8 +8,9 @@ void main()
 	{
 		system("cls");
 		cin >> a;
-		cout << "Вы ввели моном :";
+		cout << "Вы ввели моном: " ;
 		PrintMonom(a);
+		//cout << a << endl;
 		system("pause");
 	}
 	
