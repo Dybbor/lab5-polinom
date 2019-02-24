@@ -1,6 +1,6 @@
 #include "pch.h"
-
-TEST(TestCaseName, TestName) {
+#include "..\Monom\Monom.h"
+TEST(TMonom, TestName) {
   EXPECT_EQ(1, 1);
   EXPECT_TRUE(true);
 }
