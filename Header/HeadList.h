@@ -12,6 +12,7 @@ public:
 	THeadList();		//Конструктор по умолчанию
 	~THeadList();		//Деструктор
 protected :
+	public:
 	TLink <T> *pHead,	//Указатель на голову
 		*pFirst,		//Указатель на первый элемент в списке
 		*pLast,			//Указатель на последний элемент в списке
@@ -23,7 +24,7 @@ protected :
 	void InsFirst(const T &elem);	//Вставить зваено в начало  списка
 	void InsLast(const T &elem);	//Вставить звено в конец списка
 	void DelCurrent();	//Удалить текущее звено
-	void Reset();		//Обнулить все счетчики
+	void Reset();		//Обнулить счетчики
 	void GoNext();		//Нужные указатели передвигает вправо на 1 звено
 	bool IsEnd();		// Проверка на конец списка
 };  
@@ -33,7 +34,7 @@ THeadList <T>::THeadList()
 {
 	pHead = new TLink <T>;
 	pHead->pNext = pHead;
-	pFirst = pCurr = pLast = pHead;
+	pFirst = pCurr = pLast =pPrev= pHead;
 	size = 0;
 }
 template <class T>
@@ -57,6 +58,16 @@ void THeadList <T> ::InsCurrent(const T &elem)
 	pPrev->pNext = tmp;
 	tmp->pNext = pCurr;
 	pCurr = tmp;
+	if (size == 0)
+	{
+		pos = 1;
+		pLast = tmp;
+		pFirst = tmp;
+	}
+	if (pos == 1) 
+	{
+		pFirst = tmp;
+	}
 	size++;
 }
 template <class T>
@@ -64,7 +75,7 @@ void THeadList <T> ::InsFirst(const T &elem)
 {
 	TLink <T> * tmp = new TLink <T>;
 	tmp->val = elem;
-	if (size > 0) 
+	if (size > 0)
 	{
 		pHead->pNext = tmp;
 		tmp->pNext = pFirst;
@@ -72,26 +83,32 @@ void THeadList <T> ::InsFirst(const T &elem)
 		size++;
 		pos++;
 	}
-	else 
+	else
 	{
 		pHead->pNext = tmp;
 		tmp->pNext = pHead;
 		pFirst = tmp;
 		pLast = tmp;
 		size++;
-		pos = 0;
-		pCurr = pFirst;
 	}
+		pCurr = pFirst;
+		pos = 1;
 }
 template <class T>
 void THeadList <T> ::InsLast(const T & elem) 
 {
 	TLink <T> *tmp = new TLink <T>;
+	tmp->val = elem;
+	tmp->pNext = pHead;
 	pLast = tmp;
-	pLast->pNext = pHead;
 	pCurr = pLast;
+	if (size == 0) 
+	{
+	
+		pFirst = tmp;
+	}
 	size++;
-	pos++;
+	pos=size;
 }
 template <class T>
 void THeadList <T>::DelCurrent() 
