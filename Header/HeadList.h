@@ -31,8 +31,8 @@ protected :
 template <class T>
 THeadList <T>::THeadList() 
 {
-	phead = new TLink <T>;
-	phead->pnext = pHead;
+	pHead = new TLink <T>;
+	pHead->pNext = pHead;
 	pFirst = pCurr = pLast = pHead;
 	size = 0;
 }
@@ -101,7 +101,7 @@ void THeadList <T>::DelCurrent()
 		TLink <T> *tmp = pCurr;
 		pPrev->pNext = tmp->pNext;
 		delete tmp;
-		PCurr = pPrev->pNext;
+		pCurr = pPrev->pNext;
 		size--;
 	}
 	else

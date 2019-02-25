@@ -1,6 +1,6 @@
 #pragma once
-#include "..\HeadList\HeadList.h"
-#include "..\Monom\Monom.h"
+#include "HeadList.h"
+#include "Monom.h"
 
 class TPolinom : public THeadList <TMonom> 
 {
