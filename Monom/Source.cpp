@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include "Monom.h"
 
 using namespace std;
@@ -10,8 +9,8 @@ void main()
 	{
 		system("cls");
 		cin >> a;
-		wcout << "Monom: ";
-		PrintMonom(a);
+		cout << "Monom: ";
+		cout << a << endl;
 		system("pause");
 	}
 }
