@@ -36,6 +36,7 @@ THeadList <T>::THeadList()
 	pHead->pNext = pHead;
 	pFirst = pCurr = pLast =pPrev= pHead;
 	size = 0;
+	pos = 0;
 }
 template <class T>
 THeadList <T >::~THeadList() 
@@ -91,8 +92,9 @@ void THeadList <T> ::InsFirst(const T &elem)
 		pLast = tmp;
 		size++;
 	}
-		pCurr = pFirst;
-		pos = 1;
+	pPrev = pHead;
+	pCurr = pFirst;
+	pos = 1;
 }
 template <class T>
 void THeadList <T> ::InsLast(const T & elem) 
@@ -100,6 +102,7 @@ void THeadList <T> ::InsLast(const T & elem)
 	TLink <T> *tmp = new TLink <T>;
 	tmp->val = elem;
 	tmp->pNext = pHead;
+	pPrev = pLast;
 	pLast = tmp;
 	pCurr = pLast;
 	if (size == 0) 
@@ -113,7 +116,7 @@ void THeadList <T> ::InsLast(const T & elem)
 template <class T>
 void THeadList <T>::DelCurrent() 
 {
-	if (pCurr != pHead && size > 0)
+	if (size>1 && pos!=1 &&pos!=0 && pos!=size)
 	{
 		TLink <T> *tmp = pCurr;
 		pPrev->pNext = tmp->pNext;
@@ -122,14 +125,47 @@ void THeadList <T>::DelCurrent()
 		size--;
 	}
 	else
-		throw "Error";
+		if (pos == size && size>1) 
+		{
+			TLink <T> *tmp = pCurr;
+			pLast = pPrev;
+			pLast->pNext = pHead;
+			pCurr = pLast;
+			delete tmp;
+			Reset();
+			while (pCurr != pLast)
+				GoNext();
+			size--;
+		}
+		else
+			if(size == 1)
+			{
+				pFirst = pCurr = pLast = pPrev = pHead;
+				pLast->pNext = pHead;
+				size = 0;
+				pos = 0;
+			}
+			else 
+				if (pos == 1) 
+				{
+					TLink <T> *tmp = pCurr;
+					pPrev->pNext = tmp->pNext;
+					delete tmp;
+					pCurr = pPrev->pNext;
+					pFirst = pCurr;
+					size--;
+				}
+				else
+					throw "Error";
 }
 template <class T> 
 void THeadList <T> ::Reset() 
 {
+	if (size == 0)
+		throw "Error";
 	pCurr = pFirst;
 	pPrev = pHead;
-	pos = 0;
+	pos = 1;
 }
 template <class T>
 void THeadList <T>::GoNext() 
