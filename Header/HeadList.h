@@ -55,18 +55,22 @@ template <class T>
 void THeadList <T> ::InsCurrent(const T &elem) 
 {
 	TLink <T> *tmp = new TLink <T>;
-	tmp->val = elem;
+	tmp->val = elem;	
+	if (pos == 1 && pPrev == pHead)
+	{
+		pFirst = tmp;
+	}
 	pPrev->pNext = tmp;
 	tmp->pNext = pCurr;
+	if (pCurr == pHead)
+	{
+		pLast = tmp;
+	}
 	pCurr = tmp;
 	if (size == 0)
 	{
 		pos = 1;
 		pLast = tmp;
-		pFirst = tmp;
-	}
-	if (pos == 1) 
-	{
 		pFirst = tmp;
 	}
 	size++;
@@ -104,8 +108,13 @@ void THeadList <T> ::InsLast(const T & elem)
 	tmp->pNext = pHead;
 	pPrev = pLast;
 	pLast = tmp;
+	pPrev->pNext = pLast;
 	pCurr = pLast;
-	if (size == 0) 
+	if (size == 1)  //≈сли есть только одно звено
+	{
+		pFirst->pNext = tmp;
+	}
+	if (size == 0)  //≈сли нет звеньев
 	{
 	
 		pFirst = tmp;
@@ -116,7 +125,7 @@ void THeadList <T> ::InsLast(const T & elem)
 template <class T>
 void THeadList <T>::DelCurrent() 
 {
-	if (size>1 && pos!=1 &&pos!=0 && pos!=size)
+	if (size>1 && pos!=1 &&pos!=0 && pos!=size) //≈сли в списке ни одно звено и текущее звено не последнее
 	{
 		TLink <T> *tmp = pCurr;
 		pPrev->pNext = tmp->pNext;
@@ -125,7 +134,7 @@ void THeadList <T>::DelCurrent()
 		size--;
 	}
 	else
-		if (pos == size && size>1) 
+		if (pos == size && size>1)  // ≈сли в списке много звеньев и текущее звено последнее
 		{
 			TLink <T> *tmp = pCurr;
 			pLast = pPrev;
@@ -138,7 +147,7 @@ void THeadList <T>::DelCurrent()
 			size--;
 		}
 		else
-			if(size == 1)
+			if(size == 1)	//≈сли только одно звено в списке
 			{
 				pFirst = pCurr = pLast = pPrev = pHead;
 				pLast->pNext = pHead;
@@ -146,7 +155,7 @@ void THeadList <T>::DelCurrent()
 				pos = 0;
 			}
 			else 
-				if (pos == 1) 
+				if (pos == 1) //≈сли в списке много звеньев, и текущее звено первое
 				{
 					TLink <T> *tmp = pCurr;
 					pPrev->pNext = tmp->pNext;
@@ -174,7 +183,10 @@ void THeadList <T>::GoNext()
 		throw "Error";
 	pPrev = pCurr;
 	pCurr = pCurr->pNext;
-	pos++;
+	if (pCurr != pHead)
+		pos++;
+	else
+		pos = 0;
 }
 template <class T>
 bool THeadList<T>::IsEnd() 

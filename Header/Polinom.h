@@ -20,7 +20,7 @@ TPolinom::TPolinom()
 	m.PowZ = -1;
 	pHead->val = m;
 }
-TPolinom::TPolinom(TPolinom & p)
+TPolinom::TPolinom(TPolinom & p) 
 {
 	pHead->val = p.pHead->val;
 	for (p.Reset(); !p.IsEnd(); p.GoNext()) 
@@ -35,12 +35,14 @@ void TPolinom::InsMonom(const TMonom &m)
 	else
 		for (Reset(); !IsEnd(); GoNext()) 
 		{
-			if (pCurr->val == m) 
-				pCurr->val.coeff += m.coeff;
-			if (pCurr->val.coeff == 0)
+			if (pCurr->val == m)
 			{
-				DelCurrent();
-				break;
+				pCurr->val.coeff += m.coeff;
+				if (pCurr->val.coeff == 0)
+				{
+					DelCurrent();
+					break;
+				}
 			}
 			if (m > pCurr->val) 
 			{
@@ -49,6 +51,47 @@ void TPolinom::InsMonom(const TMonom &m)
 			}
 		}
 	if (pCurr == pHead)
+	{
 		InsCurrent(m);
+		pos = size;
+	}
 }
 
+void TPolinom::operator+=(TPolinom q) 
+{
+	TMonom pM, qM;
+	Reset();
+	q.Reset();
+	while (true) 
+	{
+		pM = pCurr->val;
+		qM = q.pCurr->val;
+		if (pM > qM)
+			GoNext();
+		else
+			if (pM < qM)
+			{
+				InsCurrent(qM);
+				q.GoNext();
+			}
+			else
+				if (pM.PowZ == -1)
+					break;
+				else
+				{
+					double r = pM.coeff + qM.coeff;
+					if (r == 0) 
+					{
+						DelCurrent();
+						GoNext();
+					}
+					else
+					{
+						pCurr->val.coeff = r;
+						q.GoNext();
+						GoNext();
+					}
+				}
+
+	}
+}

@@ -1,7 +1,29 @@
 #include "pch.h"
 #include "..\Header\HeadList.h"
 
-
+TEST(THeadList,can_create_list) 
+{
+	THeadList <int> a;
+	EXPECT_EQ(0, a.size);
+	EXPECT_EQ(0, a.pos);
+	EXPECT_EQ(true, a.pFirst==a.pHead);
+	EXPECT_EQ(true, a.pLast == a.pHead);
+	EXPECT_EQ(true, a.pCurr == a.pHead);
+	EXPECT_EQ(true, a.pPrev == a.pHead);
+	EXPECT_EQ(true, a.pLast->pNext == a.pHead);
+}
+//TEST(THeadList, can_call_destructor)
+//{
+//	THeadList <int> a;
+//	a.InsFirst(5);
+//	a.InsCurrent(1);
+//	a.InsLast(3);
+//	a.~THeadList();
+//	EXPECT_EQ(true, a.pFirst == NULL);
+//	EXPECT_EQ(true, a.pLast == NULL);
+//	EXPECT_EQ(true, a.pCurr == NULL);
+//	EXPECT_EQ(true, a.pPrev == NULL);
+//}
 TEST(THeadList, InsFirst_in_empty_list) 
 {
 	THeadList <int> a;
@@ -84,6 +106,20 @@ TEST(THeadList, InsLast_in_list)
 	EXPECT_EQ(4, a.pPrev->val);
 	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
 }
+TEST(THeadList, InsLast_in_if_exist_only_one_link) 
+{
+	THeadList <int> a;
+	a.InsFirst(5);
+	a.InsLast(4);
+	EXPECT_EQ(2, a.size);
+	EXPECT_EQ(2, a.pos);
+	EXPECT_EQ(5, a.pFirst->val);
+	EXPECT_EQ(4, a.pCurr->val);
+	EXPECT_EQ(4, a.pLast->val);
+	EXPECT_EQ(5, a.pPrev->val);
+	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
+}
+
 TEST(THeadList, check_all_Ins_random_1) 
 {
 	THeadList <int> a;
@@ -256,4 +292,24 @@ TEST(THeadList, IsEnd_return_false)
 	a.InsFirst(5);
 	a.InsLast(4);
 	EXPECT_EQ(false, a.IsEnd());
+}
+TEST(THeadList, go_through_all_the_links) 
+{
+	int k=0;
+	THeadList <int> a;
+	a.InsFirst(5);
+	a.InsLast(4);
+	a.InsFirst(3);
+	a.InsCurrent(2);
+	a.InsLast(1);
+	for (a.Reset(); !a.IsEnd(); a.GoNext())
+		k++;
+	EXPECT_EQ(a.size, k);
+	EXPECT_EQ(5, a.size);
+	EXPECT_EQ(0, a.pos);
+	EXPECT_EQ(2, a.pFirst->val);
+	EXPECT_EQ(1,a.pCurr==a.pHead);
+	EXPECT_EQ(1, a.pLast->val);
+	EXPECT_EQ(1, a.pPrev->val);
+	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
 }
