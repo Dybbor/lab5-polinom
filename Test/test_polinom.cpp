@@ -87,3 +87,58 @@ TEST(TPolinom, insert_monom_on_middle_list)
 	EXPECT_EQ(0, p.pCurr->val.PowY);
 	EXPECT_EQ(8, p.pCurr->val.PowZ);
 }
+
+TEST(TPolinom, insert_polinom_and_it_delete) 
+{
+	TPolinom p;
+	TMonom monom1, monom2, monom3;
+	monom1.coeff = 2;
+	monom1.PowX = 2;
+	monom1.PowY = 3;
+	monom1.PowZ = 6;
+	monom2.coeff = -2;
+	monom2.PowX = 2;
+	monom2.PowY = 3;
+	monom2.PowZ = 6;
+	monom3.coeff = 3;
+	monom3.PowX = 3;
+	monom3.PowY = 0;
+	monom3.PowZ = 8;
+	p.InsMonom(monom1);
+	p.InsMonom(monom2);
+	p.InsMonom(monom3);
+	EXPECT_EQ(2, p.size);
+}
+
+TEST(TPolinom, can_add_polinom) 
+{
+	TPolinom p,q;
+	TMonom monom1, monom2;
+	monom1.coeff = 2;
+	monom1.PowX = 2;
+	monom1.PowY = 3;
+	monom1.PowZ = 6;
+	monom2.coeff = 1;
+	monom2.PowX = 5;
+	monom2.PowY = 2;
+	monom2.PowZ = 5;
+	p.InsMonom(monom1);
+	q.InsMonom(monom2);
+	p += q;
+	EXPECT_EQ(2, p.size);
+}
+TEST(TPolinom, can_multiply_on_number) 
+{
+	bool flag = 1;
+	TPolinom p;
+	TMonom monom1, monom2;
+	monom1.coeff = 2;
+	monom1.PowX = 2;
+	monom1.PowY = 3;
+	monom1.PowZ = 6;
+	monom2.coeff = 1;
+	monom2.PowX = 5;
+	monom2.PowY = 2;
+	monom2.PowZ = 5;
+	p.InsMonom(monom1)
+}

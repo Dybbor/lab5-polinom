@@ -66,6 +66,9 @@ void TPolinom::operator+=(TPolinom q)
 	{
 		pM = pCurr->val;
 		qM = q.pCurr->val;
+		if (pM.PowZ == -1)
+			break; 
+		else
 		if (pM > qM)
 			GoNext();
 		else
@@ -74,9 +77,9 @@ void TPolinom::operator+=(TPolinom q)
 				InsCurrent(qM);
 				q.GoNext();
 			}
-			else
-				if (pM.PowZ == -1)
-					break;
+			//else
+				/*if (pM.PowZ == -1)
+					break;*/
 				else
 				{
 					double r = pM.coeff + qM.coeff;
