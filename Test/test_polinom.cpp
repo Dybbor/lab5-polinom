@@ -110,7 +110,7 @@ TEST(TPolinom, insert_polinom_and_it_delete)
 	EXPECT_EQ(2, p.size);
 }
 
-TEST(TPolinom, can_add_polinom) 
+/*TEST(TPolinom, can_add_polinom) 
 {
 	TPolinom p,q;
 	TMonom monom1, monom2;
@@ -126,10 +126,9 @@ TEST(TPolinom, can_add_polinom)
 	q.InsMonom(monom2);
 	p += q;
 	EXPECT_EQ(2, p.size);
-}
+}*/
 TEST(TPolinom, can_multiply_on_number) 
 {
-	bool flag = 1;
 	TPolinom p;
 	TMonom monom1, monom2;
 	monom1.coeff = 2;
@@ -140,5 +139,11 @@ TEST(TPolinom, can_multiply_on_number)
 	monom2.PowX = 5;
 	monom2.PowY = 2;
 	monom2.PowZ = 5;
-	p.InsMonom(monom1)
+	p.InsMonom(monom1);
+	p.InsMonom(monom2);
+	p *= 5;
+	p.Reset();
+	EXPECT_EQ(5, p.pCurr->val.coeff);
+	p.GoNext();
+	EXPECT_EQ(10, p.pCurr->val.coeff);
 }

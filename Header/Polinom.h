@@ -9,6 +9,10 @@ public:
 	TPolinom(TPolinom &p);	//Конструктор копирования
 	void InsMonom(const TMonom &m); //Вставить моном на своё место
 	void operator+=(TPolinom q);	//Сложение полиномов
+	void operator-=(TPolinom q);	//Вычитание полиномов
+	void operator*=(const int &n);	//Умножение полинома на константу
+	friend istream &operator>>(istream &istr, TPolinom &p);
+	friend ostream& operator<<(ostream &ostr,  TPolinom &p);
 };
 
 TPolinom::TPolinom() 
@@ -69,17 +73,14 @@ void TPolinom::operator+=(TPolinom q)
 		if (pM.PowZ == -1)
 			break; 
 		else
-		if (pM > qM)
-			GoNext();
-		else
-			if (pM < qM)
-			{
-				InsCurrent(qM);
-				q.GoNext();
-			}
-			//else
-				/*if (pM.PowZ == -1)
-					break;*/
+			if (pM > qM)
+				GoNext();
+			else
+				if (pM < qM)
+				{
+					InsCurrent(qM);
+					q.GoNext();
+				}
 				else
 				{
 					double r = pM.coeff + qM.coeff;
@@ -97,4 +98,57 @@ void TPolinom::operator+=(TPolinom q)
 				}
 
 	}
+}
+void TPolinom::operator-=(TPolinom q) 
+{
+	q *= -1;
+	this->operator+=(q);
+}
+void TPolinom::operator*=(const int &n) 
+{
+	for (Reset(); !IsEnd(); GoNext()) 
+	{
+		this->pCurr->val.coeff *= n;
+	}
+}
+
+istream &operator>>(istream &istr, TPolinom &p) 
+{
+	int n = 1;
+	TMonom m;
+	do
+	{
+		cout << n << "th  monom :" << endl;;
+		try
+		{
+			cin >> m;
+		}
+		catch (...) 
+		{
+			return istr;
+		}
+		p.InsMonom(m);
+		n++;
+	} 
+	while (p.pCurr->val.PowX > -1 && p.pCurr->val.PowY > -1 && p.pCurr->val.PowZ >= -1);
+	return istr;
+}
+ostream& operator<<(ostream &ostr,  TPolinom &p) 
+{
+	if (p.size == 0)
+		cout << "Error";
+	else
+	{
+		for (p.Reset(); !p.IsEnd(); p.GoNext())
+		{
+			if (p.pos != 1)
+				if (p.pCurr->val.coeff > 0)
+					ostr << "+" << p.pCurr;
+				else
+					ostr << p.pCurr;
+			else
+				ostr << p.pCurr->val;
+		}
+	}
+	return ostr;
 }

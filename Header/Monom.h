@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 struct TMonom
 {
@@ -40,8 +39,21 @@ bool operator<(const TMonom &m1, const TMonom &m2)
 istream &operator>>(istream &istr, TMonom &m)
 {
 	int coeff, x, y, z;
-	istr >> coeff >> x >> y >> z;
-	if (x < 0 || y < 0 || z < 0 || coeff == 0)
+	cout << "Coeff: ";
+	istr >> coeff;
+	if (coeff == 0)
+		throw - 1;
+	cout << "Power X: ";
+	istr >> x;
+	if (x<-1)
+		throw - 1;
+	cout << "Power Y: ";
+	istr >> y;
+	if (y<-1)
+		throw - 1;
+	cout << "Power Z: ";
+	istr >> z;
+	if (z<-1)
 		throw - 1;
 	m.PowX = x;
 	m.PowY = y;
@@ -59,6 +71,8 @@ ostream& operator<<(ostream &ostr, const TMonom &m)
 		{
 			if (m.coeff != 1)
 				ostr << m.coeff << " ";
+			if (m.coeff < 0)
+				ostr << "-";
 			if (m.PowX != 0)
 			{
 				ostr << "x";
