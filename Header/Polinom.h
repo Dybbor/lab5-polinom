@@ -87,7 +87,8 @@ void TPolinom::operator+=(TPolinom q)
 					if (r == 0) 
 					{
 						DelCurrent();
-						GoNext();
+						if(size!=0)
+							GoNext();
 					}
 					else
 					{
@@ -136,16 +137,16 @@ istream &operator>>(istream &istr, TPolinom &p)
 ostream& operator<<(ostream &ostr,  TPolinom &p) 
 {
 	if (p.size == 0)
-		cout << "Error";
+		cout << 0;
 	else
 	{
 		for (p.Reset(); !p.IsEnd(); p.GoNext())
 		{
 			if (p.pos != 1)
 				if (p.pCurr->val.coeff > 0)
-					ostr << "+ " <<p.pCurr->val;
+					ostr << "+" << p.pCurr->val;
 				else
-					ostr << p.pCurr->val;
+					ostr << p.pCurr;
 			else
 				ostr << p.pCurr->val;
 		}

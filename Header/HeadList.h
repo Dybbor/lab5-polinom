@@ -11,7 +11,7 @@ class THeadList
 public:
 	THeadList();		//Конструктор по умолчанию
 	~THeadList();		//Деструктор
-protected :
+//protected :	//Для работы тестов требуется публичный доступ
 	public:
 	TLink <T> *pHead,	//Указатель на голову
 		*pFirst,		//Указатель на первый элемент в списке

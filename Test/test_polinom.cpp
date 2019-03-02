@@ -110,7 +110,7 @@ TEST(TPolinom, insert_polinom_and_it_delete)
 	EXPECT_EQ(2, p.size);
 }
 
-/*TEST(TPolinom, can_add_polinom) 
+TEST(TPolinom, can_add_polinom) 
 {
 	TPolinom p,q;
 	TMonom monom1, monom2;
@@ -126,8 +126,87 @@ TEST(TPolinom, insert_polinom_and_it_delete)
 	q.InsMonom(monom2);
 	p += q;
 	EXPECT_EQ(2, p.size);
-}*/
-TEST(TPolinom, can_multiply_on_number) 
+}
+TEST(TPolinom, can_add_polinom_with_negative_coeff_and_it_delete) 
+{
+	TPolinom p, q;
+	TMonom monom1, monom2;
+	monom1.coeff = 2;
+	monom1.PowX = 2;
+	monom1.PowY = 3;
+	monom1.PowZ = 6;
+	monom2.coeff = -2;
+	monom2.PowX = 2;
+	monom2.PowY = 3;
+	monom2.PowZ = 6;
+	p.InsMonom(monom1);
+	q.InsMonom(monom2);
+	p += q;
+	EXPECT_EQ(0, p.size);
+}
+TEST(TPolinom, can_add_polinom_with_negative_coeff_and_size1_1)
+{
+	TPolinom p, q;
+	TMonom monom1, monom2,monom3;
+	monom1.coeff = 2;
+	monom1.PowX = 2;
+	monom1.PowY = 3;
+	monom1.PowZ = 6;
+	monom2.coeff = -2;
+	monom2.PowX = 2;
+	monom2.PowY = 3;
+	monom2.PowZ = 6;
+	monom3.coeff = 1;
+	monom3.PowX = 2;
+	monom3.PowY = 0;
+	monom3.PowZ = 5;
+	p.InsMonom(monom1);
+	p.InsMonom(monom3);
+	q.InsMonom(monom2);
+	p += q;
+	EXPECT_EQ(1, p.size);
+}
+
+TEST(TPolinom, can_add_polinom_with_negative_coeff_and_size1_2)
+{
+	TPolinom p, q;
+	TMonom monom1, monom2, monom3;
+	monom1.coeff = 2;
+	monom1.PowX = 2;
+	monom1.PowY = 3;
+	monom1.PowZ = 6;
+	monom2.coeff = -2;
+	monom2.PowX = 2;
+	monom2.PowY = 3;
+	monom2.PowZ = 6;
+	monom3.coeff = 1;
+	monom3.PowX = 2;
+	monom3.PowY = 0;
+	monom3.PowZ = 5;
+	p.InsMonom(monom1);
+	q.InsMonom(monom3);
+	q.InsMonom(monom2);
+	p += q;
+	EXPECT_EQ(1, p.size);
+}
+TEST(TPolinom, can_subtraction) 
+{
+	TPolinom p, q;
+	TMonom monom1, monom2;
+	monom1.coeff = 2;
+	monom1.PowX = 2;
+	monom1.PowY = 3;
+	monom1.PowZ = 6;
+	monom2.coeff = 1;
+	monom2.PowX = 5;
+	monom2.PowY = 2;
+	monom2.PowZ = 5;
+	p.InsMonom(monom1);
+	q.InsMonom(monom2);
+	p -= q;
+	EXPECT_EQ(2, p.size);
+}
+TEST(TPolinom, can_multiply_on_const) 
 {
 	TPolinom p;
 	TMonom monom1, monom2;
