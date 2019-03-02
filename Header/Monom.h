@@ -69,10 +69,13 @@ ostream& operator<<(ostream &ostr, const TMonom &m)
 			ostr << m.coeff;
 		else
 		{
-			if (m.coeff != 1)
+			if (abs(m.coeff)==1)
+				{
+				if (m.coeff == -1)
+					cout << "-";
+				}
+			else
 				ostr << m.coeff << " ";
-			if (m.coeff < 0)
-				ostr << "-";
 			if (m.PowX != 0)
 			{
 				ostr << "x";

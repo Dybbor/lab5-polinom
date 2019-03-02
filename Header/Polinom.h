@@ -143,12 +143,27 @@ ostream& operator<<(ostream &ostr,  TPolinom &p)
 		{
 			if (p.pos != 1)
 				if (p.pCurr->val.coeff > 0)
-					ostr << "+" << p.pCurr;
+					ostr << "+ " <<p.pCurr->val;
 				else
-					ostr << p.pCurr;
+					ostr << p.pCurr->val;
 			else
 				ostr << p.pCurr->val;
 		}
 	}
 	return ostr;
+	/*if (p.size == 0)
+		throw "Error";
+	else
+	{
+		p.Reset();
+		ostr<<p.pCurr->val;
+		p.GoNext();
+		for (p.pCurr; !p.IsEnd(); p.GoNext())
+		{
+			if (p.pCurr->val.coeff > 0)
+				ostr<<"+";
+			ostr<<p.pCurr->val;
+		}
+	}
+	return ostr;*/
 }
