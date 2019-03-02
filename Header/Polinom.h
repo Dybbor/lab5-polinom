@@ -87,8 +87,17 @@ void TPolinom::operator+=(TPolinom q)
 					if (r == 0) 
 					{
 						DelCurrent();
-						if(size!=0)
+						if(size!=0)	//Если убрать то возникнет ошибка
 							GoNext();
+						else
+						{
+							q.GoNext();
+							while (!q.IsEnd())
+							{
+								InsMonom(pCurr->val);
+								q.GoNext();
+							}
+						}
 					}
 					else
 					{
@@ -98,7 +107,7 @@ void TPolinom::operator+=(TPolinom q)
 					}
 				}
 
-	}
+	}		
 }
 void TPolinom::operator-=(TPolinom q) 
 {

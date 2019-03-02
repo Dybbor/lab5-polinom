@@ -206,6 +206,24 @@ TEST(TPolinom, can_subtraction)
 	p -= q;
 	EXPECT_EQ(2, p.size);
 }
+TEST(TPolinom, can_subtraction_and_res_equal_0)
+{
+	TPolinom p, q;
+	TMonom monom1, monom2;
+	monom1.coeff = 2;
+	monom1.PowX = 2;
+	monom1.PowY = 3;
+	monom1.PowZ = 6;
+	monom2.coeff = 2;
+	monom2.PowX = 2;
+	monom2.PowY = 3;
+	monom2.PowZ = 6;
+	p.InsMonom(monom1);
+	q.InsMonom(monom2);
+	p -= q;
+	EXPECT_EQ(0, p.size);
+}
+
 TEST(TPolinom, can_multiply_on_const) 
 {
 	TPolinom p;
