@@ -20,8 +20,8 @@ public:
 		*pCurr;			//Указатель на текущее звено
 	int pos;			//Позиция звена в списке
 	int size;			//Размер списка
-	void InsCurrent(const T & elem);	//Добавить звено между предыдущем и текущем
-	void InsFirst(const T &elem);	//Вставить зваено в начало  списка
+	void InsCurrent(const T & elem);	//Добавить звено между предыдущем и текущем звеном
+	void InsFirst(const T &elem);	//Вставить звено в начало  списка
 	void InsLast(const T &elem);	//Вставить звено в конец списка
 	void DelCurrent();	//Удалить текущее звено
 	void Reset();		//Обнулить счетчики

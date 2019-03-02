@@ -11,6 +11,7 @@ public:
 	void operator+=(TPolinom q);	//Сложение полиномов
 	void operator-=(TPolinom q);	//Вычитание полиномов
 	void operator*=(const int &n);	//Умножение полинома на константу
+	void operator*=(const TMonom &m);
 	friend istream &operator>>(istream &istr, TPolinom &p);
 	friend ostream& operator<<(ostream &ostr,  TPolinom &p);
 };
@@ -34,6 +35,7 @@ TPolinom::TPolinom(TPolinom & p)
 }
 void TPolinom::InsMonom(const TMonom &m) 
 {
+	int flag=0;
 	if (size == 0) 
 		InsFirst(m);
 	else
@@ -42,6 +44,7 @@ void TPolinom::InsMonom(const TMonom &m)
 			if (pCurr->val == m)
 			{
 				pCurr->val.coeff += m.coeff;
+				flag = 1;
 				if (pCurr->val.coeff == 0)
 				{
 					DelCurrent();
@@ -54,7 +57,7 @@ void TPolinom::InsMonom(const TMonom &m)
 				break;
 			}
 		}
-	if (pCurr == pHead)
+	if (pCurr == pHead && flag==0)
 	{
 		InsCurrent(m);
 		pos = size;
@@ -119,6 +122,16 @@ void TPolinom::operator*=(const int &n)
 	for (Reset(); !IsEnd(); GoNext()) 
 	{
 		this->pCurr->val.coeff *= n;
+	}
+}
+void TPolinom ::operator*=(const TMonom &m) 
+{
+	for (Reset(); !IsEnd(); GoNext())
+	{
+		pCurr->val.coeff *= m.coeff;
+		pCurr->val.PowX += m.PowX;
+		pCurr->val.PowY += m.PowY;
+		pCurr->val.PowZ += m.PowZ;
 	}
 }
 
