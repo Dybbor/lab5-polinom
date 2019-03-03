@@ -148,7 +148,7 @@ ostream& operator<<(ostream &ostr,  TPolinom &p)
 		{
 			if (p.pos != 1)
 				if (p.pCurr->val.coeff > 0)
-					ostr << "+" << p.pCurr->val;
+					ostr << "+ " << p.pCurr->val;
 				else
 					ostr << p.pCurr->val;
 			else
