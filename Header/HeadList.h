@@ -130,20 +130,30 @@ void THeadList <T> ::InsLast(const T & elem)
 
 }
 template <class T>
-void THeadList <T>::DelCurrent() 
+void THeadList <T>::DelCurrent()
 {
-	if (pCurr != pHead && size > 0)
+	if (size == 0)
+		throw "Error";
+	/*if (pCurr != pHead && size > 0)
+	{*/
+	TLink<T> *tmp = pCurr;
+	pPrev->pNext = tmp->pNext;
+	delete tmp;
+	pCurr = pPrev->pNext;
+	size--;
+	if (pos > size)
 	{
-		TLink<T> *tmp = pCurr;
-		pPrev->pNext = tmp->pNext;
-		delete tmp;
-		pCurr = pPrev->pNext;
-		size--;
-		if (size == 0)
-		{
-			pFirst = pLast = pPrev = pCurr = pHead;
-		}
+		pos = 0;
+		pLast = pPrev;
 	}
+	if (pos == 1)
+		pFirst = pCurr;
+	if (size == 0)
+	{
+		pFirst = pLast = pPrev = pCurr = pHead;
+		pos = 0;
+	}
+	//}
 }
 template <class T> 
 void THeadList <T> ::Reset() 

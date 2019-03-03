@@ -179,90 +179,100 @@ TEST(THeadList, check_all_Ins_random_3)
 	EXPECT_EQ(4, a.pPrev->val);
 	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
 }
-//TEST(THeadList, cant_DelCurr_throw_something) 
-//{
-//	THeadList <int> a;
-//	EXPECT_ANY_THROW(a.DelCurrent());
-//}
-//
-//TEST(THeadList, can_DelCurr_and_make_empty_list) 
-//{
-//	THeadList <int> a;
-//	a.InsFirst(5);
-//	a.DelCurrent();
-//	EXPECT_EQ(0, a.size);
-//	EXPECT_EQ(0, a.pos);
-//	EXPECT_EQ(1, a.pFirst == a.pHead);
-//	EXPECT_EQ(1, a.pCurr == a.pHead);
-//	EXPECT_EQ(1, a.pLast == a.pHead);
-//	EXPECT_EQ(1, a.pPrev == a.pHead);
-//	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
-//}
-//TEST(THeadList, can_DelCurr_first_link) 
-//{
-//	THeadList <int> a;
-//	a.InsFirst(5);
-//	a.InsLast(4);
-//	a.InsCurrent(3);
-//	a.InsFirst(2);
-//	a.DelCurrent();
-//	EXPECT_EQ(3, a.size);
-//	EXPECT_EQ(1, a.pos);
-//	EXPECT_EQ(5, a.pFirst->val);
-//	EXPECT_EQ(5, a.pCurr->val);
-//	EXPECT_EQ(4, a.pLast->val);
-//	EXPECT_EQ(1, a.pPrev == a.pHead);
-//	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
-//}
-//TEST(THeadList, can_DelCurr_in_middle) 
-//{
-//	THeadList <int> a;
-//	a.InsFirst(5);
-//	a.InsLast(4);
-//	a.InsCurrent(3);
-//	a.InsCurrent(2);
-//	a.DelCurrent();
-//	EXPECT_EQ(3, a.size);
-//	EXPECT_EQ(2, a.pos);
-//	EXPECT_EQ(5, a.pFirst->val);
-//	EXPECT_EQ(3, a.pCurr->val);
-//	EXPECT_EQ(4, a.pLast->val);
-//	EXPECT_EQ(5, a.pPrev ->val);
-//	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
-//}
-//
-//TEST(THeadList, can_DelCurr_last_link) 
-//{
-//	THeadList <int> a;
-//	a.InsFirst(5);
-//	a.InsLast(4);
-//	a.InsCurrent(3);
-//	a.InsLast(1);
-//	a.DelCurrent();
-//	EXPECT_EQ(3, a.size);
-//	EXPECT_EQ(3, a.pos);
-//	EXPECT_EQ(5, a.pFirst->val);
-//	EXPECT_EQ(4, a.pCurr->val);
-//	EXPECT_EQ(4, a.pLast->val);
-//	EXPECT_EQ(3, a.pPrev->val);
-//	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
-//}
-//TEST(THeadList, can_reset_list) 
-//{
-//	THeadList <int> a;
-//	a.InsFirst(5);
-//	a.InsLast(4);
-//	a.InsCurrent(3);
-//	a.InsLast(1);
-//	a.Reset();
-//	EXPECT_EQ(4, a.size);
-//	EXPECT_EQ(1, a.pos);
-//	EXPECT_EQ(5, a.pFirst->val);
-//	EXPECT_EQ(5, a.pCurr->val);
-//	EXPECT_EQ(1, a.pLast->val);
-//	EXPECT_EQ(1, a.pPrev==a.pHead);
-//	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
-//}
+TEST(THeadList, cant_DelCurr_throw_something) 
+{
+	THeadList <int> a;
+	EXPECT_ANY_THROW(a.DelCurrent());
+}
+
+TEST(THeadList, can_DelCurr_and_make_empty_list) 
+{
+	THeadList <int> a;
+	a.InsFirst(5);
+	a.DelCurrent();
+	EXPECT_EQ(0, a.size);
+	EXPECT_EQ(0, a.pos);
+	EXPECT_EQ(1, a.pFirst == a.pHead);
+	EXPECT_EQ(1, a.pCurr == a.pHead);
+	EXPECT_EQ(1, a.pLast == a.pHead);
+	EXPECT_EQ(1, a.pPrev == a.pHead);
+	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
+}
+TEST(THeadList, can_DelCurr_first_link) 
+{
+	THeadList <int> a;
+	a.InsFirst(5);
+	a.InsLast(4);
+	a.InsCurrent(3);
+	a.InsFirst(2);
+	a.PrintList();
+	a.Reset();
+	a.DelCurrent();
+	a.PrintList();
+	EXPECT_EQ(3, a.size);
+	EXPECT_EQ(1, a.pos);
+	EXPECT_EQ(3, a.pFirst->val);
+	EXPECT_EQ(3, a.pCurr->val);
+	EXPECT_EQ(4, a.pLast->val);
+	EXPECT_EQ(1, a.pPrev == a.pHead);
+	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
+}
+TEST(THeadList, can_DelCurr_in_middle) 
+{
+	THeadList <int> a;
+	a.InsFirst(5);
+	a.InsLast(4);
+	a.InsCurrent(3);
+	a.InsFirst(2);
+	a.PrintList();
+	a.DelCurrent();
+	a.PrintList();
+	EXPECT_EQ(3, a.size);
+	EXPECT_EQ(2, a.pos);
+	EXPECT_EQ(2, a.pFirst->val);
+	EXPECT_EQ(5, a.pCurr->val);
+	EXPECT_EQ(4, a.pLast->val);
+	EXPECT_EQ(2, a.pPrev ->val);
+	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
+}
+
+TEST(THeadList, can_DelCurr_last_link) 
+{
+	THeadList <int> a;
+	a.InsFirst(5);
+	a.InsLast(4);
+	a.InsCurrent(3);
+	a.InsLast(1);
+	a.GoNext();
+	a.GoNext();
+	a.GoNext();
+	a.PrintList();
+	a.DelCurrent();
+	a.PrintList();
+	EXPECT_EQ(3, a.size);
+	EXPECT_EQ(0, a.pos);
+	EXPECT_EQ(3, a.pFirst->val);
+	EXPECT_EQ(1, a.pCurr==a.pHead);
+	EXPECT_EQ(4, a.pLast->val);
+	EXPECT_EQ(4, a.pPrev->val);
+	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
+}
+TEST(THeadList, can_reset_list) 
+{
+	THeadList <int> a;
+	a.InsFirst(5);
+	a.InsLast(4);
+	a.InsCurrent(3);
+	a.InsLast(1);
+	a.Reset();
+	EXPECT_EQ(4, a.size);
+	EXPECT_EQ(1, a.pos);
+	EXPECT_EQ(3, a.pFirst->val);
+	EXPECT_EQ(3, a.pCurr->val);
+	EXPECT_EQ(1, a.pLast->val);
+	EXPECT_EQ(1, a.pPrev==a.pHead);
+	EXPECT_EQ(1, a.pLast->pNext == a.pHead);
+}
 TEST(THeadList, throw_when_reset_empty_list) 
 {
 	THeadList <int> a;
