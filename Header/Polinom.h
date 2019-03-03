@@ -67,13 +67,15 @@ void TPolinom::InsMonom(const TMonom &m)
 void TPolinom::operator+=(TPolinom q) 
 {
 	TMonom pM, qM;
+	if (size < 1 && q.size < 1)
+		throw "Error";
 	Reset();
 	q.Reset();
 	while (true) 
 	{
 		pM = pCurr->val;
 		qM = q.pCurr->val;
-		if (pM.PowZ == -1)
+		if (pM.PowZ == -1 && qM.PowZ==-1)
 			break; 
 		else
 			if (pM > qM)
@@ -168,7 +170,7 @@ ostream& operator<<(ostream &ostr,  TPolinom &p)
 				if (p.pCurr->val.coeff > 0)
 					ostr << "+" << p.pCurr->val;
 				else
-					ostr << p.pCurr;
+					ostr << p.pCurr->val;
 			else
 				ostr << p.pCurr->val;
 		}

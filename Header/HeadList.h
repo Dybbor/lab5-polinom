@@ -27,6 +27,7 @@ public:
 	void Reset();		//Обнулить счетчики
 	void GoNext();		//Нужные указатели передвигает вправо на 1 звено
 	bool IsEnd();		// Проверка на конец списка
+	void PrintList();
 };  
 
 template <class T>
@@ -54,39 +55,50 @@ THeadList <T >::~THeadList()
 template <class T>
 void THeadList <T> ::InsCurrent(const T &elem) 
 {
-	TLink <T> *tmp = new TLink <T>;
-	tmp->val = elem;	
-	if (pos == 1 && pPrev == pHead)
+	if (pCurr == pHead && pPrev == pLast)
 	{
-		pFirst = tmp;
+		InsLast(elem);
+		pCurr = pLast;
+		pos = size;
 	}
-	pPrev->pNext = tmp;
-	tmp->pNext = pCurr;
-	if (pCurr == pHead)
+	else
 	{
-		pLast = tmp;
+		TLink <T> *tmp = new TLink <T>;
+		tmp->val = elem;
+		pPrev->pNext = tmp;
+		tmp->pNext = pCurr;
+		if (size == 0)
+		{
+			pos = 1;
+			pLast = tmp;
+			pFirst = tmp;
+		}
+		if (pos == 1)
+		{
+			pFirst = tmp;
+		}
+		pCurr = tmp;
+		size++;
 	}
-	pCurr = tmp;
-	if (size == 0)
-	{
-		pos = 1;
-		pLast = tmp;
-		pFirst = tmp;
-	}
-	size++;
 }
 template <class T>
 void THeadList <T> ::InsFirst(const T &elem) 
 {
-	TLink <T> * tmp = new TLink <T>;
+	TLink<T> *tmp = new TLink<T>;
 	tmp->val = elem;
 	if (size > 0)
 	{
 		pHead->pNext = tmp;
 		tmp->pNext = pFirst;
+		if (size == 1)
+			pLast = tmp->pNext;
 		pFirst = tmp;
 		size++;
 		pos++;
+		if (pos == 2) 
+		{
+			pPrev = tmp;
+		}
 	}
 	else
 	{
@@ -94,78 +106,44 @@ void THeadList <T> ::InsFirst(const T &elem)
 		tmp->pNext = pHead;
 		pFirst = tmp;
 		pLast = tmp;
+		pLast->pNext = pHead;
 		size++;
+		pos = 1;
+		pCurr = pFirst;
 	}
-	pPrev = pHead;
-	pCurr = pFirst;
-	pos = 1;
 }
 template <class T>
 void THeadList <T> ::InsLast(const T & elem) 
 {
-	TLink <T> *tmp = new TLink <T>;
+	TLink<T> *tmp = new TLink<T>;
 	tmp->val = elem;
+	pLast->pNext = tmp;
 	tmp->pNext = pHead;
-	pPrev = pLast;
-	pLast = tmp;
-	pPrev->pNext = pLast;
-	pCurr = pLast;
-	if (size == 1)  //Если есть только одно звено
+	if (size == 0) 
 	{
-		pFirst->pNext = tmp;
-	}
-	if (size == 0)  //Если нет звеньев
-	{
-	
 		pFirst = tmp;
+		pCurr = tmp;
+		pos = 1;
 	}
+	pLast = tmp;
 	size++;
-	pos=size;
+
 }
 template <class T>
 void THeadList <T>::DelCurrent() 
 {
-	if (size>1 && pos!=1 &&pos!=0 && pos!=size) //Если в списке ни одно звено и текущее звено не последнее
+	if (pCurr != pHead && size > 0)
 	{
-		TLink <T> *tmp = pCurr;
+		TLink<T> *tmp = pCurr;
 		pPrev->pNext = tmp->pNext;
 		delete tmp;
 		pCurr = pPrev->pNext;
 		size--;
-	}
-	else
-		if (pos == size && size>1)  // Если в списке много звеньев и текущее звено последнее
+		if (size == 0)
 		{
-			TLink <T> *tmp = pCurr;
-			pLast = pPrev;
-			pLast->pNext = pHead;
-			pCurr = pLast;
-			delete tmp;
-			Reset();
-			while (pCurr != pLast)
-				GoNext();
-			size--;
+			pFirst = pLast = pPrev = pCurr = pHead;
 		}
-		else
-			if(size == 1)	//Если только одно звено в списке
-			{
-				pFirst = pCurr = pLast = pPrev = pHead;
-				pLast->pNext = pHead;
-				size = 0;
-				pos = 0;
-			}
-			else 
-				if (pos == 1) //Если в списке много звеньев, и текущее звено первое
-				{
-					TLink <T> *tmp = pCurr;
-					pPrev->pNext = tmp->pNext;
-					delete tmp;
-					pCurr = pPrev->pNext;
-					pFirst = pCurr;
-					size--;
-				}
-				else
-					throw "Error";
+	}
 }
 template <class T> 
 void THeadList <T> ::Reset() 
@@ -192,4 +170,15 @@ template <class T>
 bool THeadList<T>::IsEnd() 
 {
 	return (pCurr == pHead);
+}
+
+template <class T>
+void THeadList<T>::PrintList() {
+	TLink<T> *tmp = pFirst;
+	while (tmp != pHead)
+	{
+		std::cout << tmp->val << std::endl;
+		tmp = tmp->pNext;
+	}
+	std::cout << std::endl;
 }
