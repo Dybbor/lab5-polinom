@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClInclude Include="..\Header\HeadList.h" />
     <ClInclude Include="..\Header\Monom.h" />
+    <ClInclude Include="..\Header\Polinom.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />

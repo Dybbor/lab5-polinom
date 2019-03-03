@@ -134,8 +134,6 @@ void THeadList <T>::DelCurrent()
 {
 	if (size == 0)
 		throw "Error";
-	/*if (pCurr != pHead && size > 0)
-	{*/
 	TLink<T> *tmp = pCurr;
 	pPrev->pNext = tmp->pNext;
 	delete tmp;
@@ -153,7 +151,6 @@ void THeadList <T>::DelCurrent()
 		pFirst = pLast = pPrev = pCurr = pHead;
 		pos = 0;
 	}
-	//}
 }
 template <class T> 
 void THeadList <T> ::Reset() 

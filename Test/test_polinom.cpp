@@ -81,6 +81,7 @@ TEST(TPolinom, insert_monom_on_middle_list)
 	p.InsMonom(monom1);
 	p.InsMonom(monom2);
 	p.InsMonom(monom3);
+	EXPECT_EQ(3, p.size);
 	EXPECT_EQ(2, p.pos);
 	EXPECT_EQ(3, p.pCurr->val.coeff);
 	EXPECT_EQ(3, p.pCurr->val.PowX);
@@ -105,9 +106,12 @@ TEST(TPolinom, insert_polinom_and_it_delete)
 	monom3.PowY = 0;
 	monom3.PowZ = 8;
 	p.InsMonom(monom1);
+	cout << p << endl;
 	p.InsMonom(monom2);
+	cout << p << endl;
 	p.InsMonom(monom3);
-	EXPECT_EQ(2, p.size);
+	cout << p << endl;
+	EXPECT_EQ(1, p.size);
 }
 
 TEST(TPolinom, can_add_polinom) 
@@ -164,6 +168,7 @@ TEST(TPolinom, can_add_polinom_with_negative_coeff_and_size1_1)
 	p.InsMonom(monom3);
 	q.InsMonom(monom2);
 	p += q;
+	cout << p << endl;
 	EXPECT_EQ(1, p.size);
 }
 

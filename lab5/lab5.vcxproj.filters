@@ -21,6 +21,9 @@
     <ClInclude Include="..\Header\HeadList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Polinom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">

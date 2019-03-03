@@ -107,3 +107,12 @@ ostream& operator<<(ostream &ostr, const TMonom &m)
 	}
 	return  ostr;
 }
+TMonom InsValueInMonom(double coeff, int x,int y,int z) //Вставить значения в моном
+{
+	TMonom m;
+	m.coeff = coeff;
+	m.PowX = x;
+	m.PowY = y;
+	m.PowZ = z;
+	return m;
+}
