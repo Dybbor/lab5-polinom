@@ -8,6 +8,7 @@ public:
 	TPolinom();		//Конструктор
 	TPolinom(TPolinom &p);	//Конструктор копирования
 	void InsMonom(const TMonom &m); //Вставить моном на своё место
+	TPolinom operator=( TPolinom &p);
 	void operator+=(TPolinom q);	//Сложение полиномов
 	void operator-=(TPolinom q);	//Вычитание полиномов
 	void operator*=(const int &n);	//Умножение полинома на константу
@@ -62,6 +63,26 @@ void TPolinom::InsMonom(const TMonom &m)
 		InsCurrent(m);
 		pos = size;
 	}
+}
+
+TPolinom TPolinom ::operator=(TPolinom &p) 
+{
+	if (size!=0)
+		Reset();
+	if (size > p.size) 
+	{	
+		Reset();
+		while (!IsEnd())
+		{
+			DelCurrent();
+		}
+
+	}
+	for (p.Reset(); !p.IsEnd(); p.GoNext())
+	{
+		this->InsMonom(p.pCurr->val);
+	}
+	return *this;
 }
 
 void TPolinom::operator+=(TPolinom q) {
