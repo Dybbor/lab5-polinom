@@ -10,7 +10,7 @@ int main()
 	p.InsMonom(InsValueInMonom(3, 0, 2, 3));
 	p.InsMonom(InsValueInMonom(5, 0, 0, 1));
 	p.InsMonom(InsValueInMonom(5, 0, 0, 0));
-	q.InsMonom(InsValueInMonom(2, 5, 2, 3));
+	q.InsMonom(InsValueInMonom(2, 1, 2, 3));
 	q.InsMonom(InsValueInMonom(4, 0, 2, 3));
 	q.InsMonom(InsValueInMonom(2, 0, 1, 0));
 	q.InsMonom(InsValueInMonom(-5, 0, 0, 0));
